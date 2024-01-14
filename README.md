@@ -1,4 +1,15 @@
-# ( ◕◡◕)っ Cloudflare Workers Google OAuth
+# ( ◕◡◕)っ Cloudflare Workers Google OAuth (Stateless)
+
+This repo is main to serve as a helper to quickly retrive `refresh_token` for ANY Google OAuth client_id.
+
+## Usage
+1. Deploy: Either use my deployed instance ( https://google-auth.misty.workers.dev ), or deploy your own (directly `wrangler publish`, no configuration needed.)
+2. Configure Google OAuth: use this as your OAuth Callback URL: `https://YOUR-WORKER-DOMAIN.workers.dev/auth/[YOUR_CLIENT_ID]/[YOUR_CLIENT_SECRET]`
+3. Call this site: `https://google-auth.misty.workers.dev/?client_id=[YOUR_CLIENT_ID]&client_secret=[YOUR_CLIENT_SECRET]&scope=https://www.googleapis.com/auth/drive`
+   It will be automatically redirect to login url
+4. Harvest the refresh token: When auth success, refresh_token will be returned directly, in plain text
+
+## Original README
 
 This is a companion repository for the blog post at [Apiumhub :: Tech blog](https://apiumhub.com/tech-blog-barcelona/implementing-google-oauth-google-api-cloudflare-workers/).
 
