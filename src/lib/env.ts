@@ -6,9 +6,9 @@ export interface EnvSystem {
 }
 
 const system: EnvSystem = {
-  isLocal: LOCAL,
-  clientID: CLIENT_ID,
-  clientSecret: CLIENT_SECRET,
+  isLocal: false,
+  clientID: "",
+  clientSecret: "",
   now: () => Date.now(),
 }
 

@@ -3,7 +3,7 @@ import { EnvSystem } from './env'
 export interface GoogleSystem {
   oauthURL: (params: AuthParams) => string
   tokenExchange: (
-    env: EnvSystem,
+    clientID: string, clientSecret: string,
     url: URL,
     code: string,
   ) => Promise<TokenResponse>
@@ -20,6 +20,7 @@ interface AuthParams {
   response_type: 'code'
   scope: string // A space-delimited list of scopes that identify the resources that your application could access on the user's behalf. These values inform the consent screen that Google displays to the user.
   state?: string // Specifies any string value that your application uses to maintain state between your authorization request and the authorization server's response.
+  [x: string | number | symbol]: unknown;
 }
 
 interface TokenParams {
@@ -32,6 +33,7 @@ interface TokenParams {
 
 interface TokenResponse {
   access_token: string // The token that your application sends to authorize a Google API request.
+  refresh_token: string // The token that your application sends to authorize a Google API request.
   expires_in: number // The remaining lifetime of the access token in seconds.
 }
 
@@ -49,7 +51,7 @@ export interface DriveFiles {
 }
 
 export const DRIVE_SCOPE =
-  'https://www.googleapis.com/auth/drive.metadata.readonly'
+  'https://www.googleapis.com/auth/drive'
 
 export function oauthURL(params: AuthParams): string {
   const url = new URL('https://accounts.google.com/o/oauth2/v2/auth')
@@ -62,12 +64,12 @@ export function oauthURL(params: AuthParams): string {
 }
 
 async function tokenExchange(
-  env: EnvSystem,
+  clientID: string, clientSecret: string,
   url: URL,
   code: string,
 ): Promise<TokenResponse> {
-  const { clientSecret, clientID } = env
-  const redidirectURI = url.origin + '/auth'
+  // const redidirectURI = url.origin + '/auth'
+  const redidirectURI = url.origin + `/auth/${clientID}/${clientSecret}`
   const params: TokenParams = {
     client_id: clientID,
     client_secret: clientSecret,

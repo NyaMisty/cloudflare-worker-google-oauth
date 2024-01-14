@@ -11,17 +11,18 @@ export async function save(
   token: KVToken,
   expiration: number,
 ): Promise<void> {
-  return authTokens.put(auth, token, {
-    expiration: Math.floor(expiration),
-  })
+  // return authTokens.put(auth, token, {
+  //   expiration: Math.floor(expiration),
+  // })
 }
 
 export async function get(auth: string): Promise<KVToken | null> {
-  return authTokens.get(auth, 'text')
+  // return authTokens.get(auth, 'text')
+  return null
 }
 
 export async function remove(auth: string): Promise<void> {
-  return authTokens.delete(auth)
+  // return authTokens.delete(auth)
 }
 
 const system: KVSystem = {

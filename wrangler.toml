@@ -1,7 +1,8 @@
-name = "{{ project-name }}"
+name = "google-auth"
 type = "javascript"
 
+main = "src/index.ts"
+
 account_id = ""
-kv_namespaces = [ 
-         { binding = "authTokens", id = "" }
-]
+
+compatibility_date = "2022-01-14"
